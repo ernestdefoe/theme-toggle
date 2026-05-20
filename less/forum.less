@@ -1,7 +1,7 @@
-// Theme Toggle — header day/night/system button.
+// Theme Toggle — header theme picker (dark / dark-hc / light / light-hc / system).
 //
-// Inherits Flarum's .Button--icon sizing/hover so we visually match
-// the search & notifications buttons in HeaderSecondary on any theme.
+// Inherits Flarum's .Button--icon sizing/hover so we visually match the
+// search & notifications buttons in HeaderSecondary on any theme.
 
 .ThemeToggle {
   &.Button.Button--icon {
@@ -19,4 +19,9 @@
   &:active .Button-icon {
     transform: scale(0.92);
   }
+}
+
+.ThemeToggle-menu .ThemeToggle-option .Button-icon {
+  width: 1.2em;
+  text-align: center;
 }
