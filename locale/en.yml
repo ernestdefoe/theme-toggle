@@ -1,0 +1,6 @@
+ernestdefoe-theme-toggle:
+  forum:
+    toggle:
+      title_dark: "Switch to light mode"
+      title_light: "Switch to system theme"
+      title_system: "Switch to dark mode"
