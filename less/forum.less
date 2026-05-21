@@ -19,6 +19,51 @@
   &:active .Button-icon {
     transform: scale(0.92);
   }
+
+  // Desktop default: keep the toggle a compact icon-only button in
+  // HeaderSecondary. The label still renders into the DOM for assistive
+  // tech and is reused by the mobile drawer below.
+  .Button-label {
+    display: none;
+  }
+}
+
+// ---------------------------------------------------------------------
+// Mobile slide-out drawer
+//
+// Flarum 2 reuses HeaderSecondary inside `.App-drawer` on phone-width
+// viewports. There our items sit alongside Search / Sign Up / Log In
+// rows — those are full-width left-aligned rows. Without an override
+// the toggle would be a tiny round icon hovering alone in a 248px row
+// with no visible text. Convert it to a matching menu row.
+// ---------------------------------------------------------------------
+.App-drawer {
+  .ThemeToggle.Button.Button--icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    padding: 8px 16px;
+    gap: 10px;
+    border-radius: 0;
+    text-align: left;
+  }
+
+  .ThemeToggle .Button-icon {
+    margin: 0;
+    width: 1.2em;
+    text-align: center;
+    // The "rotate on hover" trick from the header doesn't make sense
+    // in a vertical menu list — disable.
+    transform: none !important;
+    transition: none;
+  }
+
+  .ThemeToggle .Button-label {
+    display: inline;
+    font-weight: 500;
+  }
 }
 
 .ThemeToggle-menu .ThemeToggle-option .Button-icon {

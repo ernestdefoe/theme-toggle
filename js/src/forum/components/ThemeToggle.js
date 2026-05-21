@@ -32,6 +32,12 @@ export default class ThemeToggle extends Component {
         menuClassName="Dropdown-menu ThemeToggle-menu"
         icon={ICONS[choice]}
         caretIcon={null}
+        // `label` populates the button's <span.Button-labelText> so the
+        // mobile slide-out drawer can render the toggle as a labeled row
+        // ("[icon] Theme") next to the other menu items. The label is
+        // hidden via CSS on the desktop secondary header where the
+        // toggle should stay icon-only.
+        label={tr('label')}
         accessibleToggleLabel={tr('label')}
         title={tr(`option_${TR_KEY(choice)}`)}
       >
