@@ -17,6 +17,12 @@ import { resolveTheme, bindSystemListener } from './theme';
 resolveTheme();
 
 app.initializers.add('ernestdefoe-theme-toggle', () => {
+  // Re-apply after Flarum core's own boot logic has run. Core sets
+  // <html data-theme="…"> from the user's `colorScheme` preference
+  // during initialization, which would otherwise clobber the choice we
+  // just applied at module-load time — making the page revert to the
+  // server-side default on every refresh.
+  resolveTheme();
   bindSystemListener();
 
   extend(HeaderSecondary.prototype, 'items', function (items: ItemList<unknown>) {
