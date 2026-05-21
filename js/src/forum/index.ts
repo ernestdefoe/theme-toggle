@@ -1,6 +1,7 @@
 import app from 'flarum/forum/app';
 import { extend } from 'flarum/common/extend';
 import HeaderSecondary from 'flarum/forum/components/HeaderSecondary';
+import type ItemList from 'flarum/common/utils/ItemList';
 
 import ThemeToggle from './components/ThemeToggle';
 import { resolveTheme, bindSystemListener } from './theme';
@@ -18,7 +19,7 @@ resolveTheme();
 app.initializers.add('ernestdefoe-theme-toggle', () => {
   bindSystemListener();
 
-  extend(HeaderSecondary.prototype, 'items', function (items) {
+  extend(HeaderSecondary.prototype, 'items', function (items: ItemList<unknown>) {
     items.add('theme-toggle', ThemeToggle.component(), 25);
   });
 });

@@ -2,14 +2,12 @@ import Component from 'flarum/common/Component';
 import Dropdown from 'flarum/common/components/Dropdown';
 import Button from 'flarum/common/components/Button';
 import app from 'flarum/forum/app';
-import {
-  CHOICES,
-  readChoice,
-  writeChoice,
-  resolveTheme,
-} from '../theme';
 
-const ICONS = {
+// `m` is a UMD global at runtime (provided by Mithril via Flarum's reg);
+// @types/mithril supplies the ambient namespace, so no explicit import.
+import { CHOICES, type Choice, readChoice, writeChoice, resolveTheme } from '../theme';
+
+const ICONS: Record<Choice, string> = {
   'dark':     'fas fa-moon',
   'dark-hc':  'fas fa-moon',
   'light':    'fas fa-sun',
@@ -18,12 +16,12 @@ const ICONS = {
 };
 
 // Translation keys can't contain hyphens cleanly; use underscores.
-const TR_KEY = (c) => c.replace(/-/g, '_');
+const TR_KEY = (c: Choice): string => c.replace(/-/g, '_');
 
 export default class ThemeToggle extends Component {
   view() {
     const choice = readChoice();
-    const tr = (key) =>
+    const tr = (key: string) =>
       app.translator.trans(`ernestdefoe-theme-toggle.forum.toggle.${key}`);
 
     return (

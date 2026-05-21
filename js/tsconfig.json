@@ -1,0 +1,20 @@
+{
+  "extends": "flarum-tsconfig",
+  "include": [
+    "src/**/*",
+    "forum.ts",
+    // Flarum core declares ambient globals (`m`, `app`, `flarum`, JSX
+    // attribute typing) under `@types/`. Pull them in so tsc sees them.
+    "../vendor/flarum/core/js/dist-typings/@types/**/*.d.ts"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      // Flarum core's typings are shipped inside the core composer
+      // package. `composer install` at the repo root drops them at
+      // `vendor/flarum/core/js/dist-typings/`, which `npm run
+      // check-typings` resolves through this mapping.
+      "flarum/*": ["../vendor/flarum/core/js/dist-typings/*"]
+    }
+  }
+}

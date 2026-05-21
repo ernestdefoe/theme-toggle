@@ -19,6 +19,8 @@
     "php": "^8.3",
     "flarum/core": "^2.0"
   },
+  "minimum-stability": "beta",
+  "prefer-stable": true,
   "extra": {
     "flarum-extension": {
       "title": "Theme Toggle",
