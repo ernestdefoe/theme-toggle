@@ -5,7 +5,7 @@ import app from 'flarum/forum/app';
 
 // `m` is a UMD global at runtime (provided by Mithril via Flarum's reg);
 // @types/mithril supplies the ambient namespace, so no explicit import.
-import { CHOICES, type Choice, readChoice, writeChoice, resolveTheme } from '../theme';
+import { CHOICES, type Choice, readChoice, persistChoice, resolveTheme } from '../theme';
 
 const ICONS: Record<Choice, string> = {
   'dark':     'fas fa-moon',
@@ -46,7 +46,7 @@ export default class ThemeToggle extends Component {
             icon={c === choice ? 'fas fa-check' : ICONS[c]}
             active={c === choice}
             onclick={() => {
-              writeChoice(c);
+              persistChoice(c);
               resolveTheme();
               m.redraw();
             }}
