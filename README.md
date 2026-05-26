@@ -1,5 +1,11 @@
 # Theme Toggle
 
+[![Floxum](https://floxum.com/extension/ernestdefoe/theme-toggle/badge/name)](https://floxum.com/extension/ernestdefoe/theme-toggle)
+[![Version](https://floxum.com/extension/ernestdefoe/theme-toggle/badge/highest-version)](https://floxum.com/extension/ernestdefoe/theme-toggle)
+[![Downloads](https://floxum.com/extension/ernestdefoe/theme-toggle/badge/downloads)](https://floxum.com/extension/ernestdefoe/theme-toggle)
+[![Review](https://floxum.com/extension/ernestdefoe/theme-toggle/badge/review)](https://floxum.com/extension/ernestdefoe/theme-toggle)
+[![License](https://floxum.com/extension/ernestdefoe/theme-toggle/badge/license)](https://floxum.com/extension/ernestdefoe/theme-toggle)
+
 A small, theme-agnostic day/night/system picker for the Flarum 2 header. Drops into any Flarum 2 theme that respects the native `<html data-theme="…">` signal (every theme that ships with or extends Flarum 2 does, including the default).
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
