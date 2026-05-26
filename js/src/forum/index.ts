@@ -4,7 +4,7 @@ import HeaderSecondary from 'flarum/forum/components/HeaderSecondary';
 import type ItemList from 'flarum/common/utils/ItemList';
 
 import ThemeToggle from './components/ThemeToggle';
-import { resolveTheme, bindSystemListener, hasStoredChoice, syncOnBoot } from './theme';
+import { resolveTheme, bindSystemListener, syncOnBoot, acceptSchemeChange } from './theme';
 
 // Pre-paint: avoid a flash before Flarum's own boot runs. Reads
 // localStorage only — at this stage app.session is undefined; we use
@@ -27,17 +27,17 @@ app.initializers.add('ernestdefoe-theme-toggle', () => {
     resolveTheme();
   });
 
-  // Flarum's Application.mount() calls initColorScheme() → setColorScheme()
-  // *after* initializers, which would clobber the data-theme we set above
-  // with the server-side colorScheme preference. Override setColorScheme so
-  // a local choice always wins; fall back to Flarum's behaviour otherwise
-  // (Flarum's path will apply the admin's forum default — the desired
-  // behaviour for a freshly-logged-out actor).
+  // Intercept setColorScheme so:
+  //   - The built-in Settings page Appearance picker (which calls
+  //     setColorScheme(mode.id) right after savePreferences resolves)
+  //     applies live, without requiring a page refresh.
+  //   - Flarum's boot-time initColorScheme() can still apply the
+  //     admin's forum default for actors with no cached choice.
+  //   - Our cached toggle pick still wins when nobody else owns the
+  //     decision (the prior persistence behaviour).
+  // See acceptSchemeChange() in ./theme for the full decision tree.
   override(app, 'setColorScheme', function (original, scheme) {
-    if (hasStoredChoice()) {
-      resolveTheme();
-      return;
-    }
+    if (acceptSchemeChange(scheme)) return;
     return original(scheme);
   });
 

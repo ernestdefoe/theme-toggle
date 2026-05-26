@@ -228,6 +228,59 @@ export function resolveTheme(): void {
   root.setAttribute('data-theme', choice === 'system' ? systemTheme() : choice);
 }
 
+/**
+ * Called from the `setColorScheme` override in index.ts. The incoming
+ * `scheme` is whatever Flarum (or any external caller) wants to apply.
+ *
+ * Two authoritative paths we want to honour live:
+ *
+ *  1. **Built-in Settings page Appearance picker.** It calls
+ *     `user.savePreferences({colorScheme}).then(() => app.setColorScheme(mode.id))`
+ *     (see vendor/flarum/core SettingsPage.tsx). Without acceptance,
+ *     our `hasStoredChoice()` shortcut would keep applying the OLD
+ *     cached value and the picker would require a refresh to land.
+ *
+ *  2. **Boot/mount when `allowUserColorScheme` is true.** Flarum's
+ *     `initColorScheme()` calls `setColorScheme(user.preferences().colorScheme)`.
+ *     Same shape as case (1) — we sync our cache so a brand-new
+ *     browser with no prior cache writes the preference in for the
+ *     next pre-paint.
+ *
+ * The trigger that distinguishes both from "admin-forced default" or
+ * the watch-system-pref re-init is: **the incoming `scheme` matches
+ * the user's current `colorScheme` preference**. When it doesn't, we
+ * fall through to the existing cached-choice-wins behaviour so an
+ * admin who forces a forum-wide theme doesn't get overridden by our
+ * code (the actual user-vs-admin policy decision still belongs to
+ * Flarum core's `allowUserColorScheme` gate).
+ *
+ * Returns true when the call was handled (override should return);
+ * false when the override should fall through to the original
+ * `setColorScheme`.
+ */
+export function acceptSchemeChange(scheme: unknown): boolean {
+  const incoming = schemeToChoice(scheme);
+  if (incoming === null) return false;
+
+  const user = app.session?.user;
+  const userPref = user ? schemeToChoice(user.preferences()?.colorScheme) : null;
+
+  if (user && userPref !== null && incoming === userPref) {
+    writeChoice(incoming);
+    lsSet(OWNER_KEY, String(user.id()));
+    resolveTheme();
+    if (typeof m !== 'undefined') m.redraw();
+    return true;
+  }
+
+  if (hasStoredChoice()) {
+    resolveTheme();
+    return true;
+  }
+
+  return false;
+}
+
 let mediaListenerBound = false;
 
 export function bindSystemListener(): void {
