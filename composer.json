@@ -21,6 +21,11 @@
   },
   "minimum-stability": "beta",
   "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "Ernestdefoe\\ThemeToggle\\": "src/"
+    }
+  },
   "extra": {
     "flarum-extension": {
       "title": "Theme Toggle",
