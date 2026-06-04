@@ -26,7 +26,7 @@ return [
         // a closure needs no autoload and works the moment the file updates.
         ->content(function (Document $document, ServerRequestInterface $request): void {
             $actor = RequestUtil::getActor($request);
-            $actorId = $actor->isGuest() ? 'null' : json_encode((string) $actor->id());
+            $actorId = $actor->isGuest() ? 'null' : json_encode((string) $actor->id);
 
             $document->preHead[] = '<script>(function(){try{'
                 . 'var V=["dark","dark-hc","light","light-hc","system"],'
