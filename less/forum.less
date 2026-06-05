@@ -68,6 +68,49 @@
     display: inline;
     font-weight: 500;
   }
+
+  // Flarum turns header dropdown menus into a fixed bottom-sheet on phones, but
+  // this toggle lives inside the slide-out `.App-drawer`, which is
+  // CSS-transformed. `position: fixed` resolves against a transformed ancestor
+  // (not the viewport), so the sheet lands off-screen with its top clipped —
+  // the first option ("Dark") becomes unreachable. Render the menu INLINE
+  // instead: it expands as a sublist in the drawer's own scroll flow, so every
+  // option is always reachable.
+  //
+  // The Dropdown is a ButtonGroup laid out as an inline-flex ROW (toggle button
+  // + menu side by side), so the menu would otherwise sit to the RIGHT of the
+  // toggle and overflow the narrow drawer. Switch it to block so the menu
+  // stacks directly BELOW the toggle row.
+  .App-drawer .Dropdown:has(> .ThemeToggle) {
+    display: block;
+  }
+  // Higher specificity than core's `.Dropdown .Dropdown-menu`, plus `!important`
+  // to beat core's `!important` bottom-sheet declarations.
+  .App-drawer .ThemeToggle-menu.Dropdown-menu {
+    position: static;
+    transform: none !important;
+    visibility: hidden;
+    max-height: 0;
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0 !important;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transition: none;
+  }
+  .App-drawer .Dropdown.open > .ThemeToggle-menu.Dropdown-menu {
+    visibility: visible;
+    max-height: none;
+    overflow: visible;
+    // Bootstrap appends a `.dropdown-backdrop` (z 1020) inside the open dropdown
+    // to catch outside clicks; an in-flow (static) menu would render beneath it,
+    // so taps on the options hit the backdrop and just close the menu. Lift the
+    // menu above the backdrop while staying in flow — outside taps still close.
+    position: relative;
+    z-index: var(--zindex-dropdown);
+  }
 }
 
 .ThemeToggle-menu .ThemeToggle-option .Button-icon {
