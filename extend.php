@@ -28,6 +28,12 @@ return [
             $actor = RequestUtil::getActor($request);
             $actorId = $actor->isGuest() ? 'null' : json_encode((string) $actor->id);
 
+            // This pre-paint snippet MUST be a self-contained inline script in
+            // <head>: it runs before the JS bundle loads to set data-theme and
+            // prevent a flash of the wrong theme (FOUC). It therefore cannot
+            // import or share theme.ts's runtime logic (which isn't loaded yet)
+            // — the small overlap with theme.ts::resolveTheme is inherent to the
+            // standard no-flash dark-mode pattern, not avoidable duplication.
             $document->preHead[] = '<script>(function(){try{'
                 . 'var V=["dark","dark-hc","light","light-hc","system"],'
                 . 'C=localStorage.getItem("ernestdefoe-theme-toggle.choice"),'

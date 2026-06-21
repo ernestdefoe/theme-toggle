@@ -26,6 +26,7 @@ export default class ThemeToggle extends Component {
 
     return (
       <Dropdown
+        className="ThemeToggle-dropdown"
         buttonClassName={`Button Button--icon ThemeToggle ThemeToggle--${choice}`}
         menuClassName="Dropdown-menu ThemeToggle-menu"
         icon={ICONS[choice]}

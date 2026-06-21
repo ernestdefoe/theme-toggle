@@ -81,7 +81,9 @@
   // + menu side by side), so the menu would otherwise sit to the RIGHT of the
   // toggle and overflow the narrow drawer. Switch it to block so the menu
   // stacks directly BELOW the toggle row.
-  .App-drawer .Dropdown:has(> .ThemeToggle) {
+  // Target the toggle's own Dropdown class (set in ThemeToggle.tsx) directly,
+  // instead of `:has(> .ThemeToggle)`, so it doesn't depend on `:has()`.
+  .App-drawer .ThemeToggle-dropdown {
     display: block;
   }
   // Higher specificity than core's `.Dropdown .Dropdown-menu`, plus `!important`

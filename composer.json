@@ -17,9 +17,8 @@
   },
   "require": {
     "php": "^8.3",
-    "flarum/core": "^2.0"
+    "flarum/core": "^2.0@rc"
   },
-  "minimum-stability": "beta",
   "prefer-stable": true,
   "extra": {
     "flarum-extension": {
