@@ -48,7 +48,11 @@
     justify-content: flex-start;
     width: 100%;
     height: auto;
-    padding: 8px 16px;
+    // 🚨 Core's own `.Button` padding, which is what every other row in the
+    // drawer uses. 16px put this toggle's icon 3px right of the search,
+    // locale and theme-switcher rows above and below it — close enough to
+    // look like a mistake rather than a choice, which is how it was reported.
+    padding: 8px 13px;
     gap: 10px;
     border-radius: 0;
     text-align: left;
