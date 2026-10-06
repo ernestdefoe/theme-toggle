@@ -116,9 +116,11 @@ Override any string by adding the matching key under `ernestdefoe-theme-toggle.f
 | `option_light_hc`         | `Light (high contrast)`  |
 | `option_system`           | `System`                 |
 
-## Discuss
+## Support
 
-Questions, ideas and release notes: [Theme Toggle on discuss.flarum.org](https://discuss.flarum.org/d/39300-theme-toggle).
+- **Support forum:** [Theme Toggle on ernestdefoe.online](https://ernestdefoe.online/d/12)
+- **Flarum community:** [Theme Toggle on discuss.flarum.org](https://discuss.flarum.org/d/39300-theme-toggle)
+- **Bug reports:** [GitHub issues](https://github.com/ernestdefoe/theme-toggle/issues)
 
 ## License
 
