@@ -35,19 +35,19 @@ return [
             // — the small overlap with theme.ts::resolveTheme is inherent to the
             // standard no-flash dark-mode pattern, not avoidable duplication.
             $document->preHead[] = '<script>(function(){try{'
-                . 'var V=["dark","dark-hc","light","light-hc","system"],'
-                . 'C=localStorage.getItem("ernestdefoe-theme-toggle.choice"),'
-                . 'O=localStorage.getItem("ernestdefoe-theme-toggle.owner-id"),'
-                . 'A=' . $actorId . ';'
-                . 'if(!C||V.indexOf(C)===-1)return;'
-                . 'if(A===null){if(O!==null)return;}else if(O!==null&&O!==A)return;'
-                . 'var s=C;'
-                . 'if(s==="system"){var m=window.matchMedia,'
-                . 'd=m&&m("(prefers-color-scheme: dark)").matches,'
-                . 'h=m&&m("(prefers-contrast: more)").matches;'
-                . 's=(d?"dark":"light")+(h?"-hc":"");}'
-                . 'document.documentElement.setAttribute("data-theme",s);'
-                . '}catch(e){}})();</script>';
+                .'var V=["dark","dark-hc","light","light-hc","system"],'
+                .'C=localStorage.getItem("ernestdefoe-theme-toggle.choice"),'
+                .'O=localStorage.getItem("ernestdefoe-theme-toggle.owner-id"),'
+                .'A='.$actorId.';'
+                .'if(!C||V.indexOf(C)===-1)return;'
+                .'if(A===null){if(O!==null)return;}else if(O!==null&&O!==A)return;'
+                .'var s=C;'
+                .'if(s==="system"){var m=window.matchMedia,'
+                .'d=m&&m("(prefers-color-scheme: dark)").matches,'
+                .'h=m&&m("(prefers-contrast: more)").matches;'
+                .'s=(d?"dark":"light")+(h?"-hc":"");}'
+                .'document.documentElement.setAttribute("data-theme",s);'
+                .'}catch(e){}})();</script>';
         }),
 
     new Extend\Locales(__DIR__.'/locale'),
