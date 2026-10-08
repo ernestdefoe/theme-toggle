@@ -8,11 +8,11 @@ import app from 'flarum/forum/app';
 import { CHOICES, type Choice, readChoice, persistChoice, resolveTheme } from '../theme';
 
 const ICONS: Record<Choice, string> = {
-  'dark':     'fas fa-moon',
-  'dark-hc':  'fas fa-moon',
-  'light':    'fas fa-sun',
+  dark: 'fas fa-moon',
+  'dark-hc': 'fas fa-moon',
+  light: 'fas fa-sun',
   'light-hc': 'fas fa-sun',
-  'system':   'fas fa-circle-half-stroke',
+  system: 'fas fa-circle-half-stroke',
 };
 
 // Translation keys can't contain hyphens cleanly; use underscores.
@@ -21,8 +21,7 @@ const TR_KEY = (c: Choice): string => c.replace(/-/g, '_');
 export default class ThemeToggle extends Component {
   view() {
     const choice = readChoice();
-    const tr = (key: string) =>
-      app.translator.trans(`ernestdefoe-theme-toggle.forum.toggle.${key}`);
+    const tr = (key: string) => app.translator.trans(`ernestdefoe-theme-toggle.forum.toggle.${key}`);
 
     return (
       <Dropdown
